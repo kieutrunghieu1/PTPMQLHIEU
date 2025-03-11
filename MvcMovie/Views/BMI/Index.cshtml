@@ -1,0 +1,16 @@
+@{
+    ViewBag.Title = "Tính chỉ số BMI";
+}
+
+<h1>Dữ liệu từ Controller gửi về là: @ViewBag.infoPerson</h1>
+
+<form method="post" action="/Home/Index">
+    <label for="height">Chiều cao (m):</label>
+    <input type="text" id="height" name="height" />
+
+    <label for="weight">Cân nặng (kg):</label>
+    <input type="text" id="weight" name="weight" />
+
+    <input type="submit" value="Tính BMI" />
+</form>
+ 

@@ -8,8 +8,7 @@ namespace MvcMovie.Models
         public string?NguoiDaiDien { get; set; }
         public string?DienThoai { get; set; }
 
-        // Liên kết với HeThongPhanPhoi
         public string?MaHTPP { get; set; }
-        public HeThongPhanPhoi HeThongPhanPhoi { get; set; } // Quan hệ 1-n với HeThongPhanPhoi
+        public HeThongPhanPhoi heThongPhanPhoi { get; set; } 
     }
 }

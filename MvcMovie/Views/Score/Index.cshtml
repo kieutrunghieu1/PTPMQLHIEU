@@ -1,0 +1,21 @@
+@{
+    ViewBag.Title = "Tính điểm tổng kết";
+}
+
+<h1>Dữ liệu từ Controller gửi về là: @ViewBag.infoPerson</h1>
+
+<form method="post" action="/Home/Index">
+    <label for="componentA">Điểm thành phần A:</label>
+    <input type="text" id="componentA" name="componentA" />
+
+    <label for="componentB">Điểm thành phần B:</label>
+    <input type="text" id="componentB" name="componentB" />
+
+    <label for="componentC">Điểm thành phần C:</label>
+    <input type="text" id="componentC" name="componentC" />
+
+    <input type="submit" value="Tính điểm tổng kết" />
+</form>
+
+
+

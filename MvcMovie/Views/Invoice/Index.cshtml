@@ -1,0 +1,19 @@
+
+
+@{
+    ViewBag.Title = "Tính tiền hóa đơn";
+}
+
+<h1>Dữ liệu từ Controller gửi về là: @ViewBag.infoPerson</h1>
+
+<form method="post" action="/Invoice/Index">
+    <label for="Quantity">Số lượng:</label>
+    <input type="number" id="Quantity" name="Quantity" value="@Model.Quantity" />
+
+    <label for="UnitPrice">Đơn giá:</label>
+    <input type="number" step="0.01" id="UnitPrice" name="UnitPrice" value="@Model.UnitPrice" />
+
+    <input type="submit" value="Tính tiền hóa đơn" />
+</form>
+
+<h3>Tổng tiền hóa đơn: @Model.TotalAmount</h3>
