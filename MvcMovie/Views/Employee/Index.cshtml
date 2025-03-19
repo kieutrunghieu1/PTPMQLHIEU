@@ -1,8 +1,34 @@
-@{
-    ViewData["Title"] = "Index";
+@model IEnumerable<MvcMovie.Models.Employee>
+
+<h1>Employee List</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Create New Employee</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Job Title</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>@item.FullName</td>
+        <td>@item.JobTitle</td>
+        <td>@item.Salary</td>
+        <td>
+            <a asp-action="Edit" asp-route-id="@item.EmployeeId" class="btn btn-warning">Edit</a>
+            <a asp-action="Delete" asp-route-id="@item.EmployeeId" class="btn btn-danger">Delete</a>
+        </td>
+    </tr>
 }
+    </tbody>
+</table>
 
-<h2>Index</h2>
-
-<p>2121050707 Kieu Trung Hieu</p>
 
