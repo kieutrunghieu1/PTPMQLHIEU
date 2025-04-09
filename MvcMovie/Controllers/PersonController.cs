@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using MvcMovie.Data;
 using MvcMovie.Models; 
 using MvcMovie.Models.Process;
+using OfficeOpenXml;
 
 namespace MvcMovie.Controllers
 {
@@ -133,26 +135,19 @@ namespace MvcMovie.Controllers
                 }
                 else
                 {
-                    //rename file when upload to server
                     var fileName = DateTime.Now.ToShortTimeString() + fileExtension;
                     var filePath = Path.Combine(Directory.GetCurrentDirectory() + "/Upload/Excels", fileName);
                     var fileLocation = new FileInfo(filePath).ToString();
                     using (var stream = new FileStream(filePath, FileMode.Create))
                     {
-                        //save file to server 
                         await file.CopyToAsync(stream);
-                        // read data from excel file fill DataTable
                         var dt = _excelProcess.ExcelToDataTable(fileLocation);
-                        //using for loop to read data from dt
                         for (int i = 0; i < dt.Rows.Count; i++)
                         {
-                            //create new Person object
                             var ps = new Person();
-                            //set value to attributes
                             ps.PersonId = dt.Rows[i][0].ToString();
                             ps.FullName = dt.Rows[i][1].ToString();
                             ps.Address = dt.Rows[i][2].ToString();
-                            //add object to context
                             _context.Add(ps);
                         }
                         await _context.SaveChangesAsync();
@@ -163,8 +158,18 @@ namespace MvcMovie.Controllers
             }
             return View(); 
         }
+        public IActionResult Download()
+        {
+            var fileName = "YourFileName" + ".xlsx";
+            using(ExcelWorksheet worksheet = ExcelPackage.Workbook.Worksheets.Add("sheet 1"));
+            WorkSheet.Cells["A1"].Value = "PersonID";
+            WorkSheet.Cells["B1"].Value = "FullName";
+            WorkSheet.Cells["C1"].Value = "Address";
+            var personList = _context.person.ToList();
+            workSheet.Cells["A2"].LoadFromCollection(personList);
+            var stream = new MemoryStream(ExcelPackage.GetAsByteArray());
+            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
+        }
     
-    
-
     }
 }
