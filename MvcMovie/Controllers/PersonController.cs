@@ -158,18 +158,7 @@ namespace MvcMovie.Controllers
             }
             return View(); 
         }
-        public IActionResult Download()
-        {
-            var fileName = "YourFileName" + ".xlsx";
-            using(ExcelWorksheet worksheet = ExcelPackage.Workbook.Worksheets.Add("sheet 1"));
-            WorkSheet.Cells["A1"].Value = "PersonID";
-            WorkSheet.Cells["B1"].Value = "FullName";
-            WorkSheet.Cells["C1"].Value = "Address";
-            var personList = _context.person.ToList();
-            workSheet.Cells["A2"].LoadFromCollection(personList);
-            var stream = new MemoryStream(ExcelPackage.GetAsByteArray());
-            return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",fileName);
-        }
+    
     
     }
 }
